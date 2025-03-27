@@ -31,12 +31,13 @@
     --breakpoint-desktop: 75rem; /* 1200px */
 
     /* Colors */
-    --color-primary: rgb(0, 208, 255);
+    --color-primary: rgb(95, 227, 255);
+    --color-secondary: rgb(116, 116, 255);
     --color-background: rgb(21, 21, 21);
     --color-background-contrast: rgb(217, 217, 217);
-    --color-dark: #151515;
-    --color-white: #FFFFFF;
-    --color-button: #D9D9D9;
+    --color-dark: rgb(21, 21, 21);
+    --color-white: rgb(255, 255, 255);
+    --color-button: rgb(217, 217, 217);
     --color-overlay: rgba(255, 255, 255, 0.05);
 
     /* Border Radius */
@@ -128,13 +129,21 @@ main {
     width: 100%;
     min-height: 100vh;
     padding: var(--gap-big);
-    background-image: url('public/images/hero-background.jpg');
-    background-size: cover;
-    background-position: center;
     display: flex;
     flex-direction: column;
     gap: var(--gap-extra-small);
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     filter: grayscale(100%);
+    opacity: 0;
+    animation: revealUp var(--animation-duration) var(--transition-normal) forwards;
 }
 
 .section-hero::before {
@@ -143,13 +152,14 @@ main {
     inset: 0;
     background: linear-gradient(
         90deg,
-        rgba(21, 21, 21, 0.95) 0%,
+        rgba(21, 21, 21, 1) 0%,
         rgba(21, 21, 21, 0.7) 20%,
         rgba(21, 21, 21, 0.3) 50%,
         rgba(21, 21, 21, 0.7) 80%,
-        rgba(21, 21, 21, 0.95) 100%
+        rgba(21, 21, 21, 1) 100%
     );
     pointer-events: none;
+    z-index: 1;
 }
 
 .main-header {
@@ -214,9 +224,39 @@ main {
     border: none;
     border-radius: var(--border-radius-button);
     cursor: pointer;
-    transition: opacity var(--transition-fast);
+    transition: all var(--transition-normal);
     white-space: nowrap;
     flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.button-icon-base::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all var(--transition-fast);
+    z-index: 0;
+}
+
+.button-icon-base:hover::before {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.button-icon-base span,
+.button-icon-base svg {
+    position: relative;
+    z-index: 1;
+    transition: color var(--transition-normal);
+}
+
+.button-icon-base:hover span,
+.button-icon-base:hover svg {
+    color: var(--color-dark);
 }
 
 .button-icon-base span {
@@ -232,10 +272,6 @@ main {
     color: var(--color-dark);
     width: 1.25rem; /* 20px */
     height: 1.25rem; /* 20px */
-}
-
-.button-icon-base:hover {
-    opacity: 0.9;
 }
 
 .hero-content {
@@ -263,8 +299,28 @@ main {
     font-weight: 400;
     font-size: var(--font-size-h1);
     line-height: 1.21;
-    color: var(--color-white);
     letter-spacing: -0.02em;
+    position: relative;
+    z-index: 1;
+    
+    /* Add gradient text effect */
+    background: linear-gradient(
+        to right,
+        var(--color-secondary) 0%,
+        var(--color-primary) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent; /* Fallback */
+
+}
+
+@supports not (background-clip: text) {
+    .hero-content h1 {
+        background: none;
+        color: var(--color-white);
+    }
 }
 
 .hero-content p {
@@ -299,8 +355,8 @@ main {
 
 .hero-content .button-icon-base {
     opacity: 0;
-    animation: revealUp var(--animation-duration) var(--transition-normal) forwards;
-    animation-delay: calc(var(--animation-delay-base) * 2);
+    animation: revealUp var(--animation-duration) var(--transition-fast) forwards;
+    animation-delay: var(--animation-delay-base);
 }
 
 /* Features Section */
@@ -416,5 +472,16 @@ footer {
     }
     to {
         opacity: 1;
+    }
+}
+
+@keyframes fadeScale {
+    from {
+        opacity: 0;
+        transform: scale(1.1);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
 }
