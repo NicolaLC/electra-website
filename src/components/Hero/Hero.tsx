@@ -7,7 +7,7 @@ export const Hero: FC = () => {
 
   return (
     <section className="hero" aria-labelledby="hero-title">
-      <h1 id="hero-title">Electra</h1>
+      <h1 className="text-3xl font-bold underline">Electra!</h1>
       <div className="hero-boxes" role="group" aria-label="Feature highlights">
         {features.map((feature, index) => (
           <article
