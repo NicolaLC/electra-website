@@ -1,22 +1,164 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Electra - A modern and innovative platform for your digital needs">
-    <meta property="og:title" content="Electra">
-    <meta property="og:description" content="Electra - A modern and innovative platform for your digital needs">
+    
+    <!-- Primary Meta Tags -->
+    <title>Electra - Un alleato per i tuoi obbiettivi | Personal Training & Fitness</title>
+    <meta name="title" content="Electra - Un alleato per i tuoi obbiettivi | Personal Training & Fitness">
+    <meta name="description" content="Un allenamento completo che unisce salute, forma fisica e benessere, ideale per migliorare il corpo in modo efficace e mirato. Scopri il nostro approccio personalizzato al fitness.">
+    <meta name="keywords" content="allenamento, fitness, benessere, salute, forma fisica, personal training, palestra, electra fitness">
+    
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Electra">
-    <meta name="twitter:description" content="Electra - A modern and innovative platform for your digital needs">
-    <title>Electra - Modern Digital Solutions</title>
+    <meta property="og:url" content="https://www.electrafitness.it/">
+    <meta property="og:title" content="Electra - Un alleato per i tuoi obbiettivi">
+    <meta property="og:description" content="Un allenamento completo che unisce salute, forma fisica e benessere, ideale per migliorare il corpo in modo efficace e mirato.">
+    <meta property="og:image" content="https://www.electrafitness.it/public/images/og-image.jpg">
 
-    <link rel="stylesheet" href="index.css">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.electrafitness.it/">
+    <meta property="twitter:title" content="Electra - Un alleato per i tuoi obbiettivi">
+    <meta property="twitter:description" content="Un allenamento completo che unisce salute, forma fisica e benessere, ideale per migliorare il corpo in modo efficace e mirato.">
+    <meta property="twitter:image" content="https://www.electrafitness.it/public/images/og-image.jpg">
+
+    <!-- Theme and Icons -->
+    <meta name="theme-color" content="#151515">
+    <link rel="icon" href="/public/favicon.ico">
+    <link rel="apple-touch-icon" href="/public/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="/public/images/electra-logo-horizontal.svg" as="image">
+    <link rel="preload" href="/public/images/hero-background.jpg" as="image">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SportsClub",
+        "name": "Electra Fitness",
+        "description": "Un allenamento completo che unisce salute, forma fisica e benessere",
+        "image": "https://www.electrafitness.it/public/images/og-image.jpg",
+        "url": "https://www.electrafitness.it",
+        "telephone": "+39XXXXXXXXXX",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Your Street Address",
+            "addressLocality": "Your City",
+            "postalCode": "Your Postal Code",
+            "addressCountry": "IT"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "XX.XXXXX",
+            "longitude": "XX.XXXXX"
+        },
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+            ],
+            "opens": "09:00",
+            "closes": "22:00"
+        }
+    }
+    </script>
 </head>
 <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link visually-hidden">Salta al contenuto principale</a>
+    
+    <!-- Main Content -->
+    <main id="main-content">
+        <section id="hero" class="section-hero" aria-labelledby="hero-title">
+            <!-- Header -->
+            <header class="main-header" role="banner">
+                <a href="/" class="logo" aria-label="Electra Homepage">
+                    <img src="public/images/electra-logo-horizontal.svg" 
+                         alt="Electra Logo" 
+                         class="logo-image" 
+                         width="120" 
+                         height="40"
+                         loading="eager">
+                </a>
+                <nav class="app-menu" aria-label="Main navigation">
+                    <ul role="list">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#try">Fai una prova</a></li>
+                        <li><a href="#about-us">Chi siamo</a></li>
+                        <li><a href="#location">Dove Siamo</a></li>
+                    </ul>
+                </nav>
+                <button class="button-icon-base" type="button">
+                    <span>Prenota un appuntamento</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                        <path d="M8 2V5M16 2V5M3.5 9.09H20.5M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M15.695 13.7H15.704M15.695 16.7H15.704M11.995 13.7H12.004M11.995 16.7H12.004M8.29401 13.7H8.30301M8.29401 16.7H8.30301" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </header>
+
+            <!-- Hero Content -->
+            <div class="hero-content">
+                <div class="text-reveal">
+                    <h1 id="hero-title">Un alleato per i tuoi obbiettivi.</h1>
+                </div>
+                <div class="text-reveal">
+                    <p>Un allenamento completo che unisce salute, forma fisica e benessere, ideale per migliorare il corpo in modo efficace e mirato.</p>
+                </div>
+                <button class="button-icon-base" type="button">
+                    <span>Scopri Electra</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                        <path d="M12 8V13M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22ZM11.995 16H12.004" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Accessibility Styles -->
+    <style>
+        .visually-hidden:not(:focus):not(:active) {
+            clip: rect(0 0 0 0);
+            clip-path: inset(50%);
+            height: 1px;
+            overflow: hidden;
+            position: absolute;
+            white-space: nowrap;
+            width: 1px;
+        }
+        .skip-link:focus {
+            clip: auto;
+            clip-path: none;
+            height: auto;
+            width: auto;
+            background-color: var(--color-dark);
+            color: var(--color-white);
+            padding: var(--gap-normal);
+            position: fixed;
+            top: var(--gap-normal);
+            left: var(--gap-normal);
+            z-index: 100;
+            text-decoration: none;
+            border: 2px solid var(--color-white);
+            border-radius: var(--border-radius-normal);
+        }
+    </style>
 </body>
 </html> 
