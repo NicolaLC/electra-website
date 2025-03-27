@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { Hero } from "./components/Hero/Hero";
-import "./App.scss";
 
 export const App: FC = () => {
   return (
