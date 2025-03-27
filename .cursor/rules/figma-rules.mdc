@@ -1,0 +1,7 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Figma Rules
+- Do not store figma variables inside environment files

@@ -1,0 +1,26 @@
+// Typography
+$font-family-primary: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+  "Helvetica Neue", sans-serif;
+$font-size-h1: 4.625rem; // 74px
+$font-size-h2: 2.375rem; // 38px
+$font-size-h3: 2.125rem; // 34px
+$font-size-h4: 1.75rem; // 28px
+$font-size-h5: 1.5rem; // 24px
+$font-size-h6: 1.375rem; // 22px
+$font-size-body: 1rem; // 16px
+$font-size-caption: 0.75rem; // 12px
+$font-weight-bold: 700;
+$line-height-h1: 1.21;
+
+// Spacing
+$padding-normal: 1rem; // 16px
+$padding-big: 1.5rem; // 24px
+$border-radius-normal: 0.25rem; // 4px
+$header-height: 5rem; // 80px
+
+// Colors
+$color-text: hsl(0, 0%, 100%); // #FFFFFF
+$color-primary: hsl(192, 100%, 50%); // rgb(0, 208, 255)
+$color-background: hsl(0, 0%, 8%); // rgb(21, 21, 21)
+$color-background-contrast: hsl(0, 0%, 85%); // rgb(217, 217, 217)

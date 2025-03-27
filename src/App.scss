@@ -1,0 +1,51 @@
+@use "./styles/variables";
+
+.app {
+  min-height: 100vh;
+  background-color: $color-background;
+  color: $color-text;
+  font-family: $font-family-primary;
+
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: $header-height;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    padding: 0 $padding-big;
+  }
+
+  footer {
+    padding: $padding-big;
+    background-color: $color-background-contrast;
+    text-align: center;
+    font-size: $font-size-caption;
+  }
+}
+
+// Global Reset
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+
+  background-color: $color-background;
+}

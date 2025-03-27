@@ -1,0 +1,49 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Coding Pattern Preferences  
+
+## 1. Simplicity First  
+- Always prefer **simple and maintainable solutions** over complex implementations.  
+- Follow the **KISS (Keep It Simple, Stupid)** principle to enhance readability and maintainability.  
+
+## 2. Avoid Code Duplication  
+- Before writing new code, **check if similar functionality already exists** in the codebase.  
+- Reuse functions, components, or utilities instead of rewriting logic from scratch.  
+- Follow **DRY (Don't Repeat Yourself)** principles to keep the codebase efficient.  
+
+## 3. Environment Considerations  
+- Ensure your code works across different environments: **development (dev), testing (test), and production (prod)**.  
+- Do not hardcode environment-specific values; instead, use **configuration files** or environment variables.  
+
+## 4. Scope of Changes  
+- Only make **necessary changes** related to the requested feature or bug fix.  
+- Avoid introducing **unrelated changes** unless they are well understood and clearly improve the code.  
+
+## 5. Handling Bug Fixes  
+- When fixing an issue, first **exhaust all options** for solving it within the existing implementation.  
+- Avoid introducing **new patterns or technologies** unless absolutely necessary.  
+- If a new approach is required, **remove the old implementation** to prevent duplicate logic.  
+
+## 6. Code Cleanliness & Organization  
+- Maintain a **clean and structured codebase**.  
+- Use meaningful naming conventions for variables, functions, and components.  
+- Follow a consistent folder structure and **keep related files grouped together**.  
+
+## 7. Handling Scripts & Large Files  
+- **Avoid writing scripts in code files**, especially if they are meant to be run only once.  
+- Keep files under **200-300 lines of code**; if a file exceeds this, refactor it into smaller, reusable modules.  
+
+## 8. Data Handling  
+- **Mock data should only be used for tests** and never for development or production environments.  
+- Avoid adding **stubbing or fake data** in dev or prod logic; always use real or properly seeded data.  
+
+## 9. Accessibility & SEO  
+- Use **ARIA attributes** where possible to improve web accessibility.  
+- Optimize **HTML templates for SEO**, ensuring proper usage of semantic elements (`<header>`, `<article>`, `<section>`, etc.).  
+
+## 10. Environment File Protection  
+- **Never overwrite the `.env` file without first asking and confirming.**  
+- Be cautious when modifying or sharing environment variables to prevent misconfigurations.  

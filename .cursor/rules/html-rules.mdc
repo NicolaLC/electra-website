@@ -1,0 +1,56 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# HTML Rules for SEO-Optimized Websites  
+
+## 1. Use Semantic HTML  
+- Use appropriate semantic elements (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<aside>`, `<footer>`) for better readability and accessibility.  
+- Avoid excessive use of `<div>` and `<span>` when more meaningful tags are available.  
+
+## 2. Optimize HTML for SEO  
+- Ensure a well-structured DOM hierarchy with meaningful heading levels (`<h1>` to `<h6>`).  
+- Only one `<h1>` per page, typically as the main title.  
+- Use descriptive and concise `<title>` and `<meta description>` tags.  
+- Include **structured data (Schema.org markup)** where applicable (e.g., articles, events, products).  
+
+## 3. Enhance Accessibility (ARIA & More)  
+- Use **ARIA attributes** (`role`, `aria-label`, `aria-labelledby`, `aria-hidden`, etc.) only when necessary.  
+- Prefer **native HTML elements** with built-in accessibility over ARIA whenever possible.  
+- Ensure proper keyboard navigation support.  
+
+## 4. Improve Performance & Loading Speed  
+- Use **lazy loading** (`loading="lazy"`) for images and iframes.  
+- Minimize unnecessary HTML nesting to improve rendering efficiency.  
+- Optimize HTML file size and reduce excessive whitespace/comments.  
+
+## 5. Optimize Links & Navigation  
+- Use **meaningful anchor text** instead of generic “Click Here.”  
+- Ensure **internal linking** is well-structured with breadcrumb navigation where applicable.  
+- Set `rel="nofollow"` for links to untrusted or low-value pages.  
+
+## 6. Optimize Forms & Inputs  
+- Use proper input types (`<input type="email">`, `<input type="tel">`, etc.) to improve UX and validation.  
+- Always provide `<label>` elements for inputs, and associate them using the `for` attribute.  
+- Utilize `autocomplete` attributes where relevant for improved form usability.  
+
+## 7. Mobile & Responsive Best Practices  
+- Ensure **mobile-first design** using responsive `<meta name="viewport" content="width=device-width, initial-scale=1">`.  
+- Avoid fixed widths in elements to support different screen sizes.  
+- Use CSS media queries instead of inline `style` for better maintainability.  
+
+## 8. Security & Best Practices  
+- Always use **HTTPS** to secure content and improve SEO ranking.  
+- Set `rel="noopener noreferrer"` on external links that open in a new tab (`target="_blank"`) to improve security.  
+- Avoid inline JavaScript and styles to enhance performance and security.  
+
+## 9. Reduce Unnecessary Markup  
+- Remove empty `<div>` and `<span>` elements.  
+- Avoid excessive nesting of elements to simplify the DOM.  
+- Ensure code is **clean and well-indented** for better maintainability.  
+
+## 10. Use Proper Metadata  
+- Define language using `<html lang="en">` for international SEO.  
+- Add `meta charset="UTF-8"` to ensure proper character encoding.  
+- Set up **Open Graph (`og:`)** and **Twitter Card metadata** for better social media previews.  
