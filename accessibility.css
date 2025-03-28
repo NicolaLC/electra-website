@@ -1,0 +1,27 @@
+/* Accessibility Styles */
+.visually-hidden:not(:focus):not(:active) {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.skip-link:focus {
+    clip: auto;
+    clip-path: none;
+    height: auto;
+    width: auto;
+    background-color: var(--color-dark);
+    color: var(--color-white);
+    padding: var(--gap-normal);
+    position: fixed;
+    top: var(--gap-normal);
+    left: var(--gap-normal);
+    z-index: 100;
+    text-decoration: none;
+    border: 2px solid var(--color-white);
+    border-radius: var(--border-radius-normal);
+} 

@@ -1,49 +1,108 @@
-// Wait for the DOM to be fully loaded
+// Track mouse position globally
+let mouseX = 0;
+let mouseY = 0;
+
+// Initialize when DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
-  // Add smooth scrolling to all anchor links
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute("href"));
-      if (target) {
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-    });
-  });
-
-  // Add animation to feature cards on scroll
-  const observerOptions = {
-    threshold: 0.1,
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = "1";
-        entry.target.style.transform = "translateY(0)";
-      }
-    });
-  }, observerOptions);
-
-  // Observe all feature cards
-  document.querySelectorAll(".feature-card").forEach((card) => {
-    card.style.opacity = "0";
-    card.style.transform = "translateY(20px)";
-    card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-    observer.observe(card);
-  });
-
-  // Add click animation to CTA button
-  const ctaButton = document.querySelector(".cta-button");
-  if (ctaButton) {
-    ctaButton.addEventListener("click", () => {
-      ctaButton.style.transform = "scale(0.95)";
+  initializeGlobalMouseTracking();
+  initializeHeroTitleEffect();
+  initializeButtonEffects();
+});
+// Add throttling to mouse movement
+function throttle(callback, limit) {
+  let waiting = false;
+  return function () {
+    if (!waiting) {
+      callback.apply(this, arguments);
+      waiting = true;
       setTimeout(() => {
-        ctaButton.style.transform = "scale(1)";
-      }, 100);
+        waiting = false;
+      }, limit);
+    }
+  };
+}
+
+// Track mouse position across the entire document
+function initializeGlobalMouseTracking() {
+  document.addEventListener(
+    "mousemove",
+    throttle((e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      // Update all interactive elements
+      updateAllElements();
+    }, 16)
+  ); // Approx. 60fps
+}
+
+// Update all interactive elements based on mouse position
+function updateAllElements() {
+  const title = document.querySelector(".hero-content h1");
+  const buttons = document.querySelectorAll(".button-icon-base");
+
+  if (title) updateElementEffect(title);
+  buttons.forEach((button) => updateElementEffect(button));
+}
+
+// Hero title hover effect
+function initializeHeroTitleEffect() {
+  const title = document.querySelector(".hero-content h1");
+  if (!title) return;
+
+  // Add initial properties
+  title.style.setProperty("--effect-opacity", "0");
+  title.style.setProperty("--x", "50%");
+  title.style.setProperty("--y", "50%");
+}
+
+// Button hover effects
+function initializeButtonEffects() {
+  const buttons = document.querySelectorAll(".button-icon-base");
+
+  buttons.forEach((button) => {
+    // Add initial properties
+    button.style.setProperty("--effect-opacity", "0");
+    button.style.setProperty("--x", "50%");
+    button.style.setProperty("--y", "50%");
+  });
+}
+
+// Update element effect based on mouse proximity
+function updateElementEffect(element) {
+  const rect = element.getBoundingClientRect();
+
+  // Calculate center point of element
+  const elementCenterX = rect.left + rect.width / 2;
+  const elementCenterY = rect.top + rect.height / 2;
+
+  // Calculate distance from mouse to element center
+  const distanceX = mouseX - elementCenterX;
+  const distanceY = mouseY - elementCenterY;
+  const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+  // Define proximity threshold based on element size
+  const proximityThreshold = Math.max(rect.width, rect.height) * 1.5;
+
+  // If mouse is within threshold distance, calculate effect
+  if (distance < proximityThreshold) {
+    // Calculate position within the element
+    const x = ((mouseX - rect.left) / rect.width) * 100;
+    const y = ((mouseY - rect.top) / rect.height) * 100;
+
+    // Calculate opacity based on distance (closer = more intense)
+    const opacityValue = 1 - distance / proximityThreshold;
+
+    // Update CSS variables
+    requestAnimationFrame(() => {
+      element.style.setProperty("--x", `${x}%`);
+      element.style.setProperty("--y", `${y}%`);
+      element.style.setProperty("--effect-opacity", opacityValue.toFixed(2));
+    });
+  } else {
+    // Reset when mouse is far away
+    requestAnimationFrame(() => {
+      element.style.setProperty("--effect-opacity", "0");
     });
   }
-});
+}
