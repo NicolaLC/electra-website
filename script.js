@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeGlobalMouseTracking();
   initializeHeroTitleEffect();
   initializeButtonEffects();
+  initializeDetailsHeadingsEffect();
 });
 // Add throttling to mouse movement
 function throttle(callback, limit) {
@@ -40,9 +41,11 @@ function initializeGlobalMouseTracking() {
 function updateAllElements() {
   const title = document.querySelector(".hero-content h1");
   const buttons = document.querySelectorAll(".button-icon-base");
+  const detailsHeadings = document.querySelectorAll(".details-content h3");
 
   if (title) updateElementEffect(title);
   buttons.forEach((button) => updateElementEffect(button));
+  detailsHeadings.forEach((heading) => updateElementEffect(heading));
 }
 
 // Hero title hover effect
@@ -65,6 +68,18 @@ function initializeButtonEffects() {
     button.style.setProperty("--effect-opacity", "0");
     button.style.setProperty("--x", "50%");
     button.style.setProperty("--y", "50%");
+  });
+}
+
+// Details headings hover effects
+function initializeDetailsHeadingsEffect() {
+  const headings = document.querySelectorAll(".details-content h3");
+  
+  headings.forEach((heading) => {
+    // Add initial properties
+    heading.style.setProperty("--effect-opacity", "0");
+    heading.style.setProperty("--x", "50%");
+    heading.style.setProperty("--y", "50%");
   });
 }
 
