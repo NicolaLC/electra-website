@@ -18,6 +18,8 @@
     --gap-normal: 1rem;
     --gap-medium: 1.25rem;
     --gap-big: 1.5rem;
+    --gap-extra-big: 3rem;
+    --gap-section: 8rem;
     --header-height: 5rem;
 
     /* Layout */
@@ -120,8 +122,13 @@ nav a:hover {
 
 /* Main Content Styles */
 main {
-    max-width: var(--container-max-width);
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section {
+    padding: var(--gap-section) 0;
 }
 
 .section-hero {
@@ -133,6 +140,7 @@ main {
     flex-direction: column;
     gap: var(--gap-extra-small);
     overflow: hidden;
+    max-width: var(--container-max-width);
 }
 
 .hero-background {
@@ -402,8 +410,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
-    padding: 3rem 0;
+    gap: var(--gap-extra-big);
     background-color: var(--color-dark);
     width: 100%;
     max-width: var(--container-max-width);
@@ -675,11 +682,13 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
-    padding: 6rem 2rem;
+    gap: var(--gap-big);
     background-color: var(--color-secondary);
     width: 100%;
     overflow: hidden;
+    background-image: url('public/images/electra-pattern.png');
+    background-repeat: repeat;
+    background-size: 40rem;
 }
 
 .electra-pattern {
@@ -703,7 +712,7 @@ footer {
 .info-row {
     display: flex;
     justify-content: center;
-    gap: 3rem;
+    gap: var(--gap-extra-big);
     max-width: var(--container-max-width);
     width: 100%;
 }
@@ -749,6 +758,10 @@ footer {
 /* About Us Section Styles */
 .section-about-us {
     background-color: var(--color-dark);
+    gap: var(--gap-extra-big);
+    display: grid;
+    
+    max-width: var(--container-max-width);
 }
 
 .about-us-image-1 {
@@ -771,7 +784,7 @@ footer {
 
 .contact-form-intro {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: var(--gap-extra-big);
     max-width: 40rem;
 }
 
@@ -799,7 +812,7 @@ footer {
 
 .form-group {
     display: flex;
-    gap: 3rem;
+    gap: var(--gap-extra-big);
     width: 100%;
 }
 
