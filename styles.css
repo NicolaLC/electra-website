@@ -146,7 +146,6 @@ main {
 
 section {
     padding: var(--gap-section) 0;
-    min-height: 100vh;
 }
 
 .section-hero {
@@ -163,10 +162,46 @@ section {
 
 .section-hero .hero-background {
     position: absolute;
-    inset: var(--gap-normal);
+    inset: 0;
     border-radius: var(--border-radius-big);
     background-color: var(--color-white);
     animation: hero-bg-intro 1s linear forwards;
+    display: grid;
+    grid-auto-flow: column;
+    overflow: hidden;
+}
+
+
+.section-hero .hero-background .hero-slice {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+
+    clip-path: polygon(10% 0, 100% 0%, 90% 100%, 0% 100%);
+}
+
+.section-hero .hero-background .hero-slice:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to bottom, var(--color-primary) 50%, var(--color-secondary) 100%);
+    pointer-events: none;
+}
+
+.section-hero .hero-background .hero-slice:hover {
+    animation: revealUp 0.25s ease-in-out forwards;
+}
+
+.section-hero .hero-background .hero-slice img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.section-hero .hero-background .hero-slice:hover img {
+    opacity: 0.5 !important;
+    animation: revealUp 0.3s ease-in-out forwards;
 }
 
 @keyframes hero-bg-intro {
@@ -196,6 +231,7 @@ section {
     background-size: 10vw;
     background-position: center;
     animation: hero-bg-logo-intro 1s linear forwards;
+    pointer-events: none
 }
 
 @keyframes hero-bg-logo-intro {
@@ -301,7 +337,7 @@ section {
         circle at var(--x, 100%) var(--y, 100%),
         var(--color-primary) 0%,
         var(--color-secondary) 50%,
-        transparent 100%
+        transparent 55%
     );
     opacity: var(--effect-opacity, 0);
     transition: opacity 0.2s ease;
@@ -371,7 +407,7 @@ section {
         circle at var(--x, 50%) var(--y, 50%),
         var(--color-primary) 0%,
         var(--color-secondary) 20%,
-        transparent 80%
+        transparent 22%
     );
     background-size: 100% 100%;
     -webkit-background-clip: text;
