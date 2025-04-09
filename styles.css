@@ -41,6 +41,7 @@
     --color-background-contrast: rgb(217, 217, 217);
     --color-button: rgb(217, 217, 217);
     --color-overlay: rgba(255, 255, 255, 0.05);
+    --color-attention: rgba(226, 38, 38, 1);
 
     /* Border Radius */
     --border-radius-small: 0.125rem;
@@ -56,6 +57,21 @@
     --animation-duration: 0.8s;
     --animation-delay-base: 0.2s;
     --animation-delay-fast: 0.1s;
+}
+
+.required {
+    color: var(--color-attention);
+}
+
+.parallax {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.parallax.electra-pattern {
+    background-image: url('public/images/electra-pattern.webp');
 }
 
 /* Set base font size and text rendering */
@@ -75,7 +91,7 @@ html {
 
 body {
     font-family: var(--font-family-primary);
-    font-size: var(--font-size-body);
+    font-size: 1rem;
     line-height: 1.5;
     color: var(--color-white);
     background-color: var(--color-dark);
@@ -129,45 +145,80 @@ main {
 
 section {
     padding: var(--gap-section) 0;
+    min-height: 100vh;
 }
 
 .section-hero {
     position: relative;
-    width: 100%;
-    min-height: 100vh;
-    padding: var(--gap-big);
+    padding: var(--gap-big) var(--gap-extra-big);
     display: flex;
     flex-direction: column;
     gap: var(--gap-extra-small);
     overflow: hidden;
-    max-width: var(--container-max-width);
+    height: 100vh;
+    aspect-ratio: 16/9;
+    max-width: 100%;
 }
 
-.hero-background {
+.section-hero .hero-background {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(100%);
-    opacity: 0;
-    animation: revealUp var(--animation-duration) var(--transition-normal) forwards;
+    inset: var(--gap-normal);
+    border-radius: var(--border-radius-big);
+    background-color: var(--color-white);
+    animation: hero-bg-intro 1s linear forwards;
 }
 
-.section-hero::before {
+@keyframes hero-bg-intro {
+    0%, 24% {
+        background-color: var(--color-white);
+    }
+    25%, 49% {
+        background-color: var(--color-primary);
+    }
+    50%, 74% {
+        background-color: var(--color-secondary);
+    }
+    75%, 99% {
+        background-color: var(--color-black);
+    }
+    100% {
+        background-color: var(--color-white);
+    }
+}
+
+.section-hero .hero-background:before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        90deg,
-        rgba(21, 21, 21, 1) 0%,
-        rgba(21, 21, 21, 0) 20%,
-        rgba(21, 21, 21, 0) 50%,
-        rgba(21, 21, 21, 0) 80%,
-        rgba(21, 21, 21, 1) 100%
-    );
-    pointer-events: none;
-    z-index: 1;
+    background-image: url('public/images/electra-logo-horizontal-black.svg');
+    background-repeat: no-repeat;
+    background-size: 10vw;
+    background-position: center;
+    animation: hero-bg-logo-intro 1s linear forwards;
+}
+
+@keyframes hero-bg-logo-intro {
+    0%, 24% {
+        opacity: 1;
+        background-size: 20vw;
+        background-image: url('public/images/electra-logo-horizontal-black.svg');
+    }
+    25%, 49% {
+        background-image: url('public/images/electra-logo-horizontal.svg');
+        background-size: 20vw;
+    }
+    50%, 74% {
+        background-image: url('public/images/electra-logo-horizontal-black.svg');
+
+    }
+    75%, 99% {
+        background-image: url('public/images/electra-logo-horizontal.svg');
+        opacity: 1;
+    }
+    100% {
+        background-size: 20vw;
+        opacity: 0;
+    }
 }
 
 .main-header {
@@ -181,6 +232,7 @@ section {
     
     opacity: 0;
     animation: revealDown var(--animation-duration) ease-out calc(var(--animation-delay-base) * 2) forwards;
+    animation-delay: 2s;
 }
 
 .logo {
@@ -209,10 +261,9 @@ section {
 
 .app-menu a {
     font-family: var(--font-family-secondary);
-    font-weight: 400;
     font-size: var(--font-size-body);
     line-height: 1.28;
-    color: var(--color-white);
+    color: var(--color-background);
     text-decoration: none;
     transition: opacity var(--transition-fast);
 }
@@ -300,10 +351,10 @@ section {
 /* Hero Title Hover Effect */
 .hero-content h1 {
     font-family: var(--font-family-primary);
-    font-weight: 400;
+    font-weight: 800;
     font-size: var(--font-size-h1);
     line-height: 1.21;
-    color: var(--color-white);
+    color: var(--color-background);
     position: relative;
     cursor: default;
 }
@@ -339,7 +390,7 @@ section {
     font-weight: 400;
     font-size: var(--font-size-h6);
     line-height: 1.28;
-    color: var(--color-white);
+    color: var(--color-background);
     max-width: 37.5rem;
     letter-spacing: -0.01em;
 }
@@ -357,17 +408,17 @@ section {
 
 /* Stagger the animations */
 .hero-content .text-reveal:nth-child(1) > * {
-    animation-delay: var(--animation-delay-base);
+    animation-delay: 1s;
 }
 
 .hero-content .text-reveal:nth-child(2) > * {
-    animation-delay: calc(var(--animation-delay-base) * 2);
+    animation-delay: 1s;
 }
 
 .hero-content .button-icon-base {
     opacity: 0;
     animation: revealUp var(--animation-duration) var(--transition-fast) forwards;
-    animation-delay: var(--animation-delay-base);
+    animation-delay: 1.5s;
 }
 
 /* Features Section */
@@ -458,8 +509,6 @@ section {
     width: 100%;
     height: 100%;
     background-color: var(--color-overlay);
-    border-radius: 0.25rem;
-    border: 0.5rem solid var(--color-dark);
     position: relative;
     overflow: hidden;
 }
@@ -686,27 +735,9 @@ footer {
     background-color: var(--color-secondary);
     width: 100%;
     overflow: hidden;
-    background-image: url('public/images/electra-pattern.png');
+    background-image: url('public/images/electra-pattern.webp');
     background-repeat: repeat;
     background-size: 40rem;
-}
-
-.electra-pattern {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    opacity: 0.02;
-    pointer-events: none;
-}
-
-.electra-pattern.second {
-    top: -20%;
-    left: 50%;
 }
 
 .info-row {
@@ -725,7 +756,7 @@ footer {
     max-width: 35rem;
     opacity: 0;
     animation: fadeInUp 0.8s ease-out forwards;
-    animation-delay: calc(var(--animation-delay-base) * var(--i, 1));
+    animation-delay: calc(var(--animation-delay-fast) * var(--i, 1));
 }
 
 .info-row:nth-child(2) .more-info {
@@ -743,15 +774,15 @@ footer {
 .more-info h3 {
     font-family: var(--font-family-primary);
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: var(--font-size-h3);
     color: var(--color-white);
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--margin-small);
 }
 
 .more-info p {
     font-family: var(--font-family-secondary);
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
     color: var(--color-white);
 }
 
@@ -779,35 +810,38 @@ footer {
 /* Contact Form Section Styles */
 .section-contacts {
     background-color: var(--color-dark);
-    padding: 6rem 2rem;
+    padding: var(--gap-section) 0;
+    display: flex;
+    gap: var(--gap-extra-big);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .contact-form-intro {
     text-align: center;
-    margin-bottom: var(--gap-extra-big);
-    max-width: 40rem;
 }
 
 .contact-form-intro h2 {
     font-family: var(--font-family-primary);
     font-weight: 400;
-    font-size: 2.375rem;
+    font-size: var(--font-size-h2);
     color: var(--color-white);
-    margin-bottom: 1rem;
+    margin-bottom: var(--margin-medium);
 }
 
 .contact-form-intro p {
     font-family: var(--font-family-secondary);
-    font-size: 1rem;
+    font-size: var(--font-size-body);
     color: var(--color-white);
 }
 
 .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: var(--gap-big);
     width: 100%;
-    max-width: 31.25rem;
+    max-width: var(--container-max-width);
 }
 
 .form-group {
@@ -826,7 +860,7 @@ footer {
 
 .input-field label {
     font-family: var(--font-family-secondary);
-    font-size: 1rem;
+    font-size: var(--font-size-body);
     color: var(--color-white);
 }
 
@@ -853,52 +887,30 @@ footer {
     border-bottom-color: var(--color-primary);
 }
 
-.checkbox-group {
-    margin-top: 1rem;
-}
-
 .checkbox-input {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: var(--gap-small);
 }
 
-.checkbox-input input[type="checkbox"] {
+.checkbox-input * {
+    cursor: pointer;
+}
+
+.checkbox-input input {
+    appearance: none;
     width: 1.5rem;
     height: 1.5rem;
-    border: 2px solid var(--color-background-contrast);
+    background-image: url(/public/images/icon-seal.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     background-color: transparent;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    border-radius: 0.25rem;
-    position: relative;
-    cursor: pointer;
+    border: none;
 }
 
-.checkbox-input input[type="checkbox"]:checked {
-    background-color: var(--color-primary);
-    border-color: var(--color-primary);
-}
-
-.checkbox-input input[type="checkbox"]:checked::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 0.75rem;
-    height: 0.5rem;
-    border-left: 2px solid var(--color-dark);
-    border-bottom: 2px solid var(--color-dark);
-    transform: translate(-50%, -60%) rotate(-45deg);
-}
-
-.checkbox-input label {
-    font-family: var(--font-family-secondary);
-    font-size: 0.875rem;
-    color: var(--color-white);
-    cursor: pointer;
+.checkbox-input input:checked {
+    background-image: url(/public/images/icon-checkmark-checked.svg);
 }
 
 /* Footer Styles */
@@ -908,6 +920,9 @@ footer {
     padding: 4rem 2rem 2rem;
     color: var(--color-dark);
     overflow: hidden;
+    background-image: url('public/images/electra-pattern-10.webp');
+    background-repeat: repeat;
+    background-size: 40rem;
 }
 
 .footer-content {
@@ -1026,3 +1041,4 @@ footer {
         height: auto;
     }
 }
+
