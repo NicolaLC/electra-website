@@ -80,6 +80,7 @@ html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: geometricPrecision;
+    scroll-behavior: smooth;
 }
 
 /* Reset and Base Styles */
@@ -133,7 +134,7 @@ nav a {
 }
 
 nav a:hover {
-    color: var(--color-primary);
+    color: var(--color-secondary);
 }
 
 /* Main Content Styles */
@@ -231,8 +232,8 @@ section {
     z-index: 1;
     
     opacity: 0;
-    animation: revealDown var(--animation-duration) ease-out calc(var(--animation-delay-base) * 2) forwards;
-    animation-delay: 2s;
+    animation: revealDown var(--animation-duration) ease-out forwards;
+    animation-delay: 1s;
 }
 
 .logo {
@@ -299,8 +300,8 @@ section {
     background-image: radial-gradient(
         circle at var(--x, 100%) var(--y, 100%),
         var(--color-primary) 0%,
-        var(--color-secondary) 20%,
-        transparent 80%
+        var(--color-secondary) 50%,
+        transparent 100%
     );
     opacity: var(--effect-opacity, 0);
     transition: opacity 0.2s ease;
@@ -497,6 +498,10 @@ section {
     flex-direction: row-reverse;
 }
 
+.details-block.reverse .details-image {
+    border-bottom: 1rem solid var(--color-secondary);
+}
+
 .details-image-container {
     flex: 1;
     display: flex;
@@ -506,11 +511,40 @@ section {
 }
 
 .details-image {
+    position: relative;
     width: 100%;
     height: 100%;
     background-color: var(--color-overlay);
     position: relative;
     overflow: hidden;
+    border-radius: var(--border-radius-big);
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 1rem solid var(--color-primary);
+    clip-path: polygon(10% 0, 100% 0%, 90% 100%, 0% 100%);
+
+    opacity: 0;
+    animation: revealUp 0.8s ease-out forwards;
+    animation-delay: calc(var(--animation-delay-fast) * var(--i, 1));
+}
+
+.details-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(
+        circle at var(--x, 100%) var(--y, 100%),
+        var(--color-primary) 0%,
+        var(--color-secondary) 50%,
+        transparent 100%
+    );
+    opacity: min(var(--effect-opacity, 0), 0.5);
+    transition: opacity 0.2s ease;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .details-content {

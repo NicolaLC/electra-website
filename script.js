@@ -45,12 +45,14 @@ function initializeEffects() {
       ".section-about-us .details-content h3"
     ),
     infoCards: document.querySelectorAll(".more-info"),
+    detailImages: document.querySelectorAll(".details-image"),
   };
 
   // Apply initial styles
   setInitialStyles(elements);
   // Set up intersection observer for animations
   setupIntersectionObserver(elements.infoCards);
+  setupIntersectionObserver(elements.detailImages);
 
   const parallaxElements = document.querySelectorAll(".parallax");
 
@@ -61,7 +63,7 @@ function initializeEffects() {
       const elementHeight = element.offsetHeight;
       const scrollRatio = (scrollPosition - elementOffset) / elementHeight;
 
-      element.style.backgroundPosition = `${scrollRatio * 1000}px ${
+      element.style.backgroundPosition = `${scrollRatio * 100}px ${
         scrollRatio * 50
       }px`;
     });
@@ -74,12 +76,16 @@ function setInitialStyles({
   buttons,
   detailsHeadings,
   aboutUsHeadings,
+  infoCards,
+  detailImages,
 }) {
   applyInitialProperties(title);
 
   buttons.forEach(applyInitialProperties);
   detailsHeadings.forEach(applyInitialProperties);
   aboutUsHeadings.forEach(applyInitialProperties);
+  infoCards.forEach(applyInitialProperties);
+  detailImages.forEach(applyInitialProperties);
 }
 
 // Apply initial CSS properties to elements
@@ -119,6 +125,7 @@ function updateAllElements() {
     ...document.querySelectorAll(".button-icon-base"),
     ...document.querySelectorAll(".details-content h3"),
     ...document.querySelectorAll(".section-about-us .details-content h3"),
+    ...document.querySelectorAll(".details-image"),
   ];
   elements.forEach(updateElementEffect);
 }
