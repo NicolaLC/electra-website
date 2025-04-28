@@ -338,7 +338,7 @@ section {
         circle at var(--x, 100%) var(--y, 100%),
         var(--color-primary) 0%,
         var(--color-secondary) 50%,
-        transparent 55%
+        transparent 100%
     );
     opacity: var(--effect-opacity, 0);
     transition: opacity 0.2s ease;
@@ -408,7 +408,7 @@ section {
         circle at var(--x, 50%) var(--y, 50%),
         var(--color-primary) 0%,
         var(--color-secondary) 20%,
-        transparent 22%
+        transparent 100%
     );
     background-size: 100% 100%;
     -webkit-background-clip: text;
@@ -535,10 +535,6 @@ section {
     flex-direction: row-reverse;
 }
 
-.details-block.reverse .details-image {
-    border-bottom: 1rem solid var(--color-secondary);
-}
-
 .details-image-container {
     flex: 1;
     display: flex;
@@ -554,10 +550,6 @@ section {
     background-color: var(--color-overlay);
     position: relative;
     overflow: hidden;
-    border-radius: var(--border-radius-big);
-    border-top-left-radius: 0;
-    border-bottom-right-radius: 0;
-    border-bottom: 1rem solid var(--color-primary);
     clip-path: polygon(10% 0, 100% 0%, 90% 100%, 0% 100%);
 
     opacity: 0;
