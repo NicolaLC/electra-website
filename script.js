@@ -162,7 +162,7 @@ function initializeContactForm() {
   const form = document.querySelector(".contact-form");
   if (!form) return;
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const fields = {
@@ -170,12 +170,27 @@ function initializeContactForm() {
       surname: document.getElementById("surname"),
       email: document.getElementById("email"),
       privacy: document.getElementById("privacy"),
+      message: document.getElementById("message"),
     };
 
     const isValid = validateForm(fields);
 
     if (isValid) {
-      showFormSuccess(form);
+      const res = await fetch("http://localhost:4243/mailer.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fields.name.value,
+          surname: fields.surname.value,
+          email: fields.email.value,
+          message: fields.message.value,
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        showFormSuccess(form);
+      }
     }
   });
 }

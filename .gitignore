@@ -4,12 +4,13 @@
 /.idea
 .env
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# PHP specific
+/server/vendor
+/server/composer.lock
 
-# testing
+# Testing
+/phpunit-result.xml
+/phpunit.cache
 /coverage
 
 # production
@@ -23,12 +24,17 @@
 .env.test.local
 .env.production.local
 
+# NPM logs and directories
+/node_modules
+/.pnp
+.pnp.js
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 build-storybook.log*
 
-# codegen 
+# codegen
 codegen/api/swagger-norm.json
 
 # Sentry Config File
