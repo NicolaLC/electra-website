@@ -86,6 +86,8 @@
         }
     }
     </script>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
 </head>
 
 <body>
@@ -95,20 +97,7 @@
     <!-- Main Content -->
     <main id="main-content">
         <section id="hero" class="section-hero" aria-labelledby="hero-title">
-            <div class="hero-background">
-                <div class="hero-slice">
-                    <img src="public/images/about-us-image-2.jpg" alt="Attiva ogni singola fibra del tuo corpo"
-                        width="100%" height="100%">
-                </div>
-                <div class="hero-slice"> <img src="public/images/about-us-image-2.jpg"
-                        alt="Attiva ogni singola fibra del tuo corpo" width="100%" height="100%"></div>
-                <div class="hero-slice"> <img src="public/images/about-us-image-2.jpg"
-                        alt="Attiva ogni singola fibra del tuo corpo" width="100%" height="100%"></div>
-                <div class="hero-slice"> <img src="public/images/about-us-image-2.jpg"
-                        alt="Attiva ogni singola fibra del tuo corpo" width="100%" height="100%"></div>
-                <div class="hero-slice"> <img src="public/images/about-us-image-2.jpg"
-                        alt="Attiva ogni singola fibra del tuo corpo" width="100%" height="100%"></div>
-            </div>
+            <div class="hero-background"></div>
             <!-- Header -->
             <header class="main-header" role="banner">
                 <a href="/" class="logo" aria-label="Electra Homepage">
@@ -455,12 +444,12 @@
 
         <div class="footer-content">
             <div id="where">
-                <h2>Indirizzo</h2>
-                <p>Via Codeborgo 1, 6500 Bellinzona, Switzerland</p>
+                <div id="map"></div>
             </div>
 
             <div class="footer-logo">
-                <img src="public/images/electra-logo-horizontal.svg" alt="Electra Logo" width="150" height="48">
+                <img src="public/images/electra-logo-horizontal-black.svg" alt="Electra Logo" class="logo-image"
+                width="48" height="48" loading="eager">
                 <p>Via Codeborgo 1, 6500 Bellinzona, Switzerland</p>
                 <div class="social-links">
                     <a href="https://instagram.com/electra_fitness_ch" class="social-link">
@@ -489,28 +478,28 @@
             </div>
         </div>
 
-        <div class="credits">
-            <div class="figma-logo">
-                <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M2.75016 16.0001C4.26891 16.0001 5.50016 14.7688 5.50016 13.2501V10.5001H2.75016C1.23141 10.5001 0.000156403 11.7313 0.000156403 13.2501C0.000156403 14.7688 1.23141 16.0001 2.75016 16.0001Z"
-                        fill="#7474FF" />
-                    <path
-                        d="M0.000156403 8.00006C0.000156403 6.48131 1.23141 5.25006 2.75016 5.25006H5.50016V10.7501H2.75016C1.23141 10.7501 0.000156403 9.51881 0.000156403 8.00006Z"
-                        fill="#7474FF" />
-                    <path d="M0 2.75C0 1.23125 1.23125 0 2.75 0H5.5V5.5H2.75C1.23125 5.5 0 4.26875 0 2.75Z"
-                        fill="#7474FF" />
-                    <path d="M5.5 0H8.25C9.76875 0 11 1.23125 11 2.75C11 4.26875 9.76875 5.5 8.25 5.5H5.5V0Z"
-                        fill="#7474FF" />
-                    <path
-                        d="M11 8.00006C11 9.51881 9.76875 10.7501 8.25 10.7501C6.73125 10.7501 5.5 9.51881 5.5 8.00006C5.5 6.48131 6.73125 5.25006 8.25 5.25006C9.76875 5.25006 11 6.48131 11 8.00006Z"
-                        fill="#7474FF" />
-                </svg>
-            </div>
-            <p>Website designed using Figma and developed by Nicola Castellani (nicolacastellanidev@gmail.com)</p>
-        </div>
     </footer>
-
+    
+    <div class="credits">
+        <p>
+            Website designed using Figma       
+            <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.75016 16.0001C4.26891 16.0001 5.50016 14.7688 5.50016 13.2501V10.5001H2.75016C1.23141 10.5001 0.000156403 11.7313 0.000156403 13.2501C0.000156403 14.7688 1.23141 16.0001 2.75016 16.0001Z"
+                    fill="#7474FF" />
+                <path
+                    d="M0.000156403 8.00006C0.000156403 6.48131 1.23141 5.25006 2.75016 5.25006H5.50016V10.7501H2.75016C1.23141 10.7501 0.000156403 9.51881 0.000156403 8.00006Z"
+                    fill="#7474FF" />
+                <path d="M0 2.75C0 1.23125 1.23125 0 2.75 0H5.5V5.5H2.75C1.23125 5.5 0 4.26875 0 2.75Z"
+                    fill="#7474FF" />
+                <path d="M5.5 0H8.25C9.76875 0 11 1.23125 11 2.75C11 4.26875 9.76875 5.5 8.25 5.5H5.5V0Z"
+                    fill="#7474FF" />
+                <path
+                    d="M11 8.00006C11 9.51881 9.76875 10.7501 8.25 10.7501C6.73125 10.7501 5.5 9.51881 5.5 8.00006C5.5 6.48131 6.73125 5.25006 8.25 5.25006C9.76875 5.25006 11 6.48131 11 8.00006Z"
+                    fill="#7474FF" />
+            </svg> 
+            and developed by Nicola Castellani <a href="mailto:nicolacastellanidev@gmail.com">(nicolacastellanidev@gmail.com)</a></p>
+    </div>
     <!-- Scripts -->
     <script src="script.js"></script>
 </body>

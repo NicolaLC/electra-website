@@ -7,7 +7,41 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeGlobalMouseTracking();
   initializeEffects();
   initializeContactForm();
+  initializeMap();
 });
+
+// Initialize Leaflet
+function initializeMap() {
+  const map = L.map("map").setView([46.192239, 9.023163], 14); // Coordinates for Bellinzona
+
+  // Add a tile layer with a custom color palette
+  L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
+    attribution: "© OpenStreetMap contributors",
+    maxZoom: 19,
+  }).addTo(map);
+
+  // Add a custom marker for the location
+  var customIcon = L.icon({
+    iconUrl: "public/images/apple-touch-icon.webp", // Replace with the actual marker icon path
+    iconSize: [38, 38], // Size of the icon
+    iconAnchor: [19, 38], // Anchor point of the icon
+    popupAnchor: [0, -38], // Position of the popup relative to the icon
+  });
+
+  L.marker([46.192239, 9.023163], { icon: customIcon })
+    .addTo(map)
+    .bindPopup(
+      "<b>Electra Fitness</b><br>Via Codeborgo 1, 6500 Bellinzona, Switzerland"
+    )
+    .openPopup();
+
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
+    subdomains: "abcd",
+    maxZoom: 19,
+  }).addTo(map);
+}
 
 // Add throttling to mouse movement to optimize performance
 function throttle(callback, limit) {
