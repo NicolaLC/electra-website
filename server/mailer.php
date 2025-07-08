@@ -42,16 +42,16 @@ try {
 
     // Server settings
     $mail->isSMTP();
-    $mail->Host       = 'smtp.gmail.com';
+    $mail->Host       = 'smtp.example.com'; // SMTP server
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'nicolacastellani92@gmail.com';          // Your Gmail address
-    $mail->Password   = 'ontw caht esyg kpao';            // Your App Password (NOT your normal Gmail password)
+    $mail->Username   = 'your_email@example.com'; // Your email address
+    $mail->Password   = 'your_app_password';      // Your App Password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587;
 
     // Recipients
-    $mail->setFrom('nicolacastellani92@gmail.com', 'Website Contact Form');
-    $mail->addAddress('nicolacastellani92@gmail.com');
+    $mail->setFrom('your_email@example.com', 'Website Contact Form');
+    $mail->addAddress('recipient@example.com');
 
     // Content
     $mail->isHTML(true);

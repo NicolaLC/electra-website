@@ -796,6 +796,8 @@ footer {
   justify-content: center;
   gap: var(--gap-extra-big);
   max-width: var(--container-max-width);
+  padding-left: var(--gap-normal);
+  padding-right: var(--gap-normal);
   width: 100%;
 }
 
