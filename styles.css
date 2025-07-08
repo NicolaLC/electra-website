@@ -214,7 +214,7 @@ section {
   gap: var(--gap-extra-small);
   overflow: hidden;
   height: calc(100vh - var(--gap-big) * 2);
-  min-height: 50rem;
+  min-height: 40rem;
   top: var(--gap-big);
   aspect-ratio: 16/9;
   max-width: calc(100vw - var(--gap-extra-big) * 2);
@@ -1257,5 +1257,100 @@ footer {
 
   .hero-content {
     padding: var(--gap-big);
+  }
+}
+
+/* WhatsApp Floating Button */
+.whatsapp-float {
+  position: fixed;
+  bottom: var(--gap-big);
+  right: var(--gap-big);
+  width: 3.5rem;
+  height: 3.5rem;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(95, 227, 255, 0.3);
+  transition: all var(--transition-normal);
+  z-index: 1000;
+  text-decoration: none;
+  color: var(--color-light);
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(95, 227, 255, 0.4);
+  background: var(--color-secondary);
+}
+
+.whatsapp-float svg {
+  transition: transform var(--transition-fast);
+}
+
+.whatsapp-float:hover svg {
+  transform: scale(1.1);
+}
+
+/* WhatsApp Tooltip */
+.whatsapp-float::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--border-radius-normal);
+  font-size: 0.875rem;
+  font-family: var(--font-family-secondary);
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.5rem);
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  margin-bottom: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+}
+
+.whatsapp-float::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  right: 1rem;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid var(--color-dark);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.5rem);
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  margin-bottom: -0.125rem;
+  z-index: 1001;
+}
+
+.whatsapp-float:hover::before,
+.whatsapp-float:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Responsive adjustments for WhatsApp button */
+@media (max-width: 48rem) {
+  .whatsapp-float {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  .whatsapp-float svg {
+    width: 20px;
+    height: 20px;
   }
 }
