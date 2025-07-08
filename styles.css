@@ -952,7 +952,7 @@ footer {
   appearance: none;
   width: 1.5rem;
   height: 1.5rem;
-  background-image: url(/public/images/icon-seal.svg);
+  background-image: url(public/images/icon-seal.svg);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -961,7 +961,7 @@ footer {
 }
 
 .checkbox-input input:checked {
-  background-image: url(/public/images/icon-checkmark-checked.svg);
+  background-image: url(public/images/icon-checkmark-checked.svg);
 }
 
 /* Footer Styles */
