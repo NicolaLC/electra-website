@@ -1181,6 +1181,7 @@ footer {
   .details-image {
     clip-path: none;
     border-radius: var(--border-radius-normal);
+    overflow: hidden;
   }
 
   .details-content {
