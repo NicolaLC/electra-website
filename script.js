@@ -33,8 +33,13 @@ function initializeMap() {
     .addTo(map)
     .bindPopup(
       "<b>Electra Fitness</b><br>Via Codeborgo 1, 6500 Bellinzona, Switzerland"
-    )
-    .openPopup();
+    ),
+    // Add a second custom marker for the new location
+    L.marker([46.169858, 8.799533], { icon: customIcon })
+      .addTo(map)
+      .bindPopup(
+        "<b>Electra Fitness</b><br>Via Vincenzo Vela 5, 6600 Locarno, Switzerland"
+      );
 
   L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
     attribution:
@@ -42,6 +47,15 @@ function initializeMap() {
     subdomains: "abcd",
     maxZoom: 19,
   }).addTo(map);
+
+  // Adjust the map view to fit all markers
+  const bounds = L.latLngBounds([
+    [46.192239, 9.023163], // Bellinzona
+    [46.169858, 8.799533], // Locarno
+  ]);
+  map.fitBounds(bounds, {
+    padding: [50, 50], // Padding around the bounds
+  });
 }
 
 // Add throttling to mouse movement to optimize performance
