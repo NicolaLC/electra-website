@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeEffects();
   initializeContactForm();
   initializeMap();
+  handleMenuToggle();
 });
 
 // Initialize Leaflet
@@ -322,4 +323,30 @@ function showFormSuccess(form) {
     }
   `;
   document.head.appendChild(style);
+}
+
+// Handle menu toggle
+function handleMenuToggle() {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const menu = document.querySelector(".app-menu");
+  const body = document.body;
+
+  menuToggle?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    menuToggle.classList.toggle("active");
+    menu?.classList.toggle("active");
+    body.classList.toggle("no-scroll");
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener("click", (e) => {
+    if (
+      e.target.tagName === "A" ||
+      (!menuToggle.contains(e.target) && !menu.contains(e.target))
+    ) {
+      menuToggle.classList.remove("active");
+      menu.classList.remove("active");
+      body.classList.remove("no-scroll");
+    }
+  });
 }

@@ -36,7 +36,7 @@
   --color-primary: rgb(95, 227, 255);
   --color-secondary: rgb(116, 116, 255);
   --color-dark: rgb(21, 21, 21);
-  --color-white: rgb(255, 255, 255);
+  --color-light: rgb(255, 255, 255);
   --color-background: rgb(21, 21, 21);
   --color-background-contrast: rgb(217, 217, 217);
   --color-button: rgb(217, 217, 217);
@@ -93,6 +93,12 @@ html {
   box-sizing: border-box;
 }
 
+/* Body scroll lock class */
+body.no-scroll {
+  overflow: hidden;
+
+}
+
 a {
     color: var(--color-primary);
 }
@@ -101,7 +107,7 @@ body {
   font-family: var(--font-family-primary);
   font-size: 1rem;
   line-height: 1.5;
-  color: var(--color-white);
+  color: var(--color-light);
   background-color: var(--color-dark);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -114,6 +120,47 @@ header {
 
 header a {
   text-decoration: none;
+}
+
+/* Base styles */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 2rem;
+  height: 1.5rem;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.toggle-bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-dark);
+  transition: transform var(--transition-fast),
+              opacity var(--transition-fast);
+  transform-origin: center;
+}
+
+/* Hamburger menu animation */
+.menu-toggle.active .toggle-bar {
+  background-color: var(--color-primary);
+}
+
+.menu-toggle.active .toggle-bar:first-child {
+  transform: translateY(calc(0.75rem - 1px)) rotate(45deg);
+}
+
+.menu-toggle.active .toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active .toggle-bar:last-child {
+  transform: translateY(calc(-0.75rem + 1px)) rotate(-45deg);
 }
 
 nav {
@@ -177,7 +224,7 @@ section {
   position: absolute;
   inset: 0;
   border-radius: var(--border-radius-big);
-  background-color: var(--color-white);
+  background-color: var(--color-light);
   animation: hero-bg-intro 1s linear forwards;
   display: grid;
   grid-auto-flow: column;
@@ -223,7 +270,7 @@ section {
 @keyframes hero-bg-intro {
   0%,
   24% {
-    background-color: var(--color-white);
+    background-color: var(--color-light);
   }
   25%,
   49% {
@@ -238,7 +285,7 @@ section {
     background-color: var(--color-black);
   }
   100% {
-    background-color: var(--color-white);
+    background-color: var(--color-light);
   }
 }
 
@@ -656,7 +703,7 @@ section {
   font-weight: 400;
   font-size: var(--font-size-body);
   line-height: 1.28;
-  color: var(--color-white);
+  color: var(--color-light);
 }
 
 /* Footer Styles */
@@ -779,7 +826,7 @@ footer {
   font-family: var(--font-family-primary);
   font-weight: 700;
   font-size: var(--font-size-h3);
-  color: var(--color-white);
+  color: var(--color-light);
   margin-bottom: var(--margin-small);
 }
 
@@ -787,7 +834,7 @@ footer {
   font-family: var(--font-family-secondary);
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
-  color: var(--color-white);
+  color: var(--color-light);
 }
 
 /* About Us Section Styles */
@@ -829,14 +876,14 @@ footer {
   font-family: var(--font-family-primary);
   font-weight: 400;
   font-size: var(--font-size-h2);
-  color: var(--color-white);
+  color: var(--color-light);
   margin-bottom: var(--margin-medium);
 }
 
 .contact-form-intro p {
   font-family: var(--font-family-secondary);
   font-size: var(--font-size-body);
-  color: var(--color-white);
+  color: var(--color-light);
 }
 
 .contact-form {
@@ -864,7 +911,7 @@ footer {
 .input-field label {
   font-family: var(--font-family-secondary);
   font-size: var(--font-size-body);
-  color: var(--color-white);
+  color: var(--color-light);
 }
 
 .input-field input,
@@ -873,7 +920,7 @@ footer {
   border: none;
   border-bottom: 2px solid var(--color-background-contrast);
   padding: var(--gap-small) 0;
-  color: var(--color-white);
+  color: var(--color-light);
   font-family: var(--font-family-secondary);
   font-size: var(--font-size-body);
   resize: none;
@@ -993,7 +1040,7 @@ footer {
 .credits p {
   font-family: var(--font-family-secondary);
   font-size: 0.75rem;
-  color: var(--color-white);
+  color: var(--color-light);
   text-align: center;
   display: flex;
   align-items: center;
@@ -1018,13 +1065,15 @@ footer {
 
 @media (max-width: 500px) {
   :root {
-    font-size: 0.75rem;
+  --font-size-h1: 5rem;
+  --font-size-h2: 2.5rem;
+  --font-size-h3: 2.3rem;
+  --font-size-h4: 2rem;
+  --font-size-h5: 1.75rem;
+  --font-size-h6: 1.5rem;
+  --font-size-body: 1.25rem;
+  --font-size-caption: 1rem;
   }
-
-  header .button-icon-base span {
-    display: none;
-  }
-
 }
 
 @media (max-width: 800px) {
@@ -1033,11 +1082,39 @@ footer {
   }
 
   section {
-    padding: var(--gap-big);
+    padding: var(--gap-extra-big) var(--gap-big);
   }
 
   section#details {
     padding-top: var(--gap-extra-big);
+  }
+
+  .main-header {
+    direction: rtl;
+    z-index: 1000;
+    grid-template-columns: minmax(0, 1fr) min-content min-content;
+    gap: var(--gap-normal);
+
+    position: fixed;
+    top: var(--gap-big);
+    right: var(--gap-big);
+    left: var(--gap-big);
+    padding: var(--gap-big);
+    border-radius: var(--border-radius-big);
+    width: unset;
+    height: unset;
+
+    background-color: var(--color-light);
+    animation: unset;
+    opacity: 1;
+  }
+
+  .main-header a button span {
+    display: none;
+  }
+
+  .main-header a button {
+    width: 5rem;
   }
 
   header a:last-child{
@@ -1045,6 +1122,38 @@ footer {
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
+  }
+
+  .menu-toggle {
+    display: flex;
+    z-index: 1000;
+  }
+
+  /* Mobile menu overlay */
+  .app-menu.active {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-dark);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    animation: revealUp 0.25s var(--transition-fast) forwards;
+  }
+
+  .app-menu.active ul {
+    flex-direction: column;
+    gap: var(--gap-extra-big);
+  }
+
+  .app-menu.active a {
+    font-size: var(--font-size-h3);
+    color: var(--color-background-contrast);
   }
 
   .section-hero {
@@ -1072,6 +1181,7 @@ footer {
   .details-image {
     clip-path: none;
     border-radius: var(--border-radius-normal);
+    overflow: hidden;
   }
 
   .details-content {
@@ -1086,6 +1196,7 @@ footer {
   .button-icon-base {
     width: min-content;
     height: auto;
+    padding: var(--gap-normal) var(--gap-medium);
   }
 
   .details-content {
@@ -1108,8 +1219,14 @@ footer {
   }
 
   .checkbox-input input {
-    width: 3rem;
+    width: 5rem;
     height: 3rem;
+  }
+
+  .contact-form-intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-normal);
   }
 
   .contact-form {
