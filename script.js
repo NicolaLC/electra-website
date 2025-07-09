@@ -225,7 +225,7 @@ function initializeContactForm() {
     const isValid = validateForm(fields);
 
     if (isValid) {
-      const res = await fetch("mailer.php", {
+      const res = await fetch(`http://localhost:4243/mailer.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

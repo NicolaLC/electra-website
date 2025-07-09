@@ -88,31 +88,34 @@
         "image": "https://electrafitness.ch/public/images/og-image.jpg",
         "url": "https://electrafitness.ch/",
         "telephone": "+41768146571",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Your Street Address",
-          "addressLocality": "Your City",
-          "postalCode": "Your Postal Code",
-          "addressCountry": "IT"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": "XX.XXXXX",
-          "longitude": "XX.XXXXX"
-        },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday"
-          ],
-          "opens": "09:00",
-          "closes": "22:00"
-        }
+        "address": [
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "Via Codeborgo 1",
+            "addressLocality": "Bellinzona",
+            "postalCode": "6500",
+            "addressCountry": "CH"
+          },
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "Via Vincenzo Vela 5",
+            "addressLocality": "Locarno",
+            "postalCode": "6600",
+            "addressCountry": "CH"
+          }
+        ],
+        "geo": [
+          {
+            "@type": "GeoCoordinates",
+            "latitude": "46.192239",
+            "longitude": "9.023163"
+          },
+          {
+            "@type": "GeoCoordinates",
+            "latitude": "46.169858",
+            "longitude": "8.799533"
+          }
+        ],
       }
     </script>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>

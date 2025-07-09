@@ -5,7 +5,8 @@
   "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js",
-    "dev": "nodemon server/index.js"
+    "dev": "nodemon server/index.js",
+    "server": "cd server && php -S localhost:4243"
   },
   "dependencies": {
     "express": "^4.18.3",

@@ -8,6 +8,17 @@ require 'vendor/autoload.php';
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+// Load environment variables from .env file if it exists
+if (file_exists('.env')) {
+    $lines = file('.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos($line, '=') !== false && !str_starts_with($line, '#')) {
+            [$key, $value] = explode('=', $line, 2);
+            $_ENV[trim($key)] = trim($value, '"\'');
+        }
+    }
+}
+
 // CORS headers
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
@@ -42,20 +53,20 @@ try {
 
     // Server settings
     $mail->isSMTP();
-    $mail->Host       = 'smtp.example.com'; // SMTP server
+    $mail->Host       = $_ENV['SMTP_HOST'] ?? 'smtp.gmail.com';
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'your_email@example.com'; // Your email address
-    $mail->Password   = 'your_app_password';      // Your App Password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port       = 587;
+    $mail->Username   = $_ENV['SMTP_USERNAME'] ?? '';
+    $mail->Password   = $_ENV['SMTP_PASSWORD'] ?? '';
+    $mail->SMTPSecure = $_ENV['SMTP_SECURE'] ?? PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port       = $_ENV['SMTP_PORT'] ?? 587;
 
     // Recipients
-    $mail->setFrom('your_email@example.com', 'Website Contact Form');
-    $mail->addAddress('recipient@example.com');
+    $mail->setFrom($_ENV['SMTP_FROM_EMAIL'] ?? $_ENV['SMTP_USERNAME'], $_ENV['SMTP_FROM_NAME'] ?? 'Website Contact Form');
+    $mail->addAddress($_ENV['RECIPIENT_EMAIL'] ?? $_ENV['SMTP_USERNAME']);
 
     // Content
     $mail->isHTML(true);
-    $mail->Subject = 'New Contact Form Submission';
+    $mail->Subject = 'Nuovo Contatto dal sito web';
     $mail->Body    = "
         <strong>Name:</strong> " . htmlspecialchars($data['name']) . "<br>
         <strong>Surname:</strong> " . htmlspecialchars($data['surname']) . "<br>
