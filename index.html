@@ -59,6 +59,12 @@
     <link rel="apple-touch-icon" href="public/images/apple-touch-icon.webp" />
     <link rel="manifest" href="manifest.json" />
 
+    <!-- SEO Enhancements -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
+    <meta name="author" content="Electra Fitness" />
+    <link rel="canonical" href="https://electrafitness.ch/" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
     <!-- Preload Critical Assets -->
     <link
       rel="preload"
@@ -263,12 +269,15 @@
         <div class="details-block">
           <div class="details-image-container">
             <div class="details-image" aria-hidden="true">
-              <img
-                src="public/images/image-00.webp"
-                alt="Attiva ogni singola fibra del tuo corpo"
-                width="110%"
-                height="110%"
-              />
+              <picture>
+                <source media="(min-width: 768px)" srcset="public/images/image-00-desktop.webp">
+                <img
+                  src="public/images/image-00.webp"
+                  alt="Attiva ogni singola fibra del tuo corpo"
+                  width="110%"
+                  height="110%"
+                />
+              </picture>
             </div>
           </div>
           <div class="details-content">
