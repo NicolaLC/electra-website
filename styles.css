@@ -623,11 +623,11 @@ section {
   background-color: var(--color-overlay);
   position: relative;
   overflow: hidden;
-  clip-path: polygon(10% 0, 100% 0%, 90% 100%, 0% 100%);
 
   opacity: 0;
   animation: revealUp 0.8s ease-out forwards;
   animation-delay: calc(var(--animation-delay-fast) * var(--i, 1));
+  border-radius: var(--border-radius-normal);
 }
 
 .details-image::after {
@@ -647,6 +647,10 @@ section {
   transition: opacity 0.2s ease;
   z-index: 1;
   pointer-events: none;
+}
+
+.details-image img {
+  object-fit: cover;
 }
 
 .details-content {
@@ -1326,26 +1330,7 @@ footer {
   z-index: 1001;
 }
 
-.whatsapp-float::after {
-  content: '';
-  position: absolute;
-  bottom: 100%;
-  right: 1rem;
-  width: 0;
-  height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 6px solid var(--color-dark);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(0.5rem);
-  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-  margin-bottom: -0.125rem;
-  z-index: 1001;
-}
-
-.whatsapp-float:hover::before,
-.whatsapp-float:hover::after {
+.whatsapp-float:hover::before {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
