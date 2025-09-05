@@ -2,8 +2,194 @@
 let mouseX = 0;
 let mouseY = 0;
 
+// Utility logger - only logs on localhost
+const logger = (() => {
+  const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  
+  return {
+    log: (...args) => {
+      if (isLocalhost) {
+        console.log(...args);
+      }
+    }
+  };
+})();
+
+// Initialize Cookie Consent
+function initializeCookieConsent() {
+  if (typeof CookieConsent === "undefined") {
+    console.warn("CookieConsent library not loaded");
+    return;
+  }
+
+  CookieConsent.run({
+    guiOptions: {
+      consentModal: {
+        layout: "box inline",
+        position: "bottom left",
+        equalWeightButtons: true,
+        flipButtons: false,
+      },
+      preferencesModal: {
+        layout: "box",
+        position: "right",
+        equalWeightButtons: true,
+        flipButtons: false,
+      },
+    },
+    categories: {
+      necessary: {
+        readOnly: true,
+      },
+      analytics: {},
+    },
+    language: {
+      default: "it",
+      translations: {
+        it: {
+          consentModal: {
+            title: "Utilizziamo i cookie",
+            description:
+              "Questo sito web utilizza cookie essenziali per garantire il corretto funzionamento e cookie di analisi per migliorare la tua esperienza. Puoi accettare tutti i cookie o personalizzare le tue preferenze.",
+            acceptAllBtn: "Accetta tutti",
+            acceptNecessaryBtn: "Solo necessari",
+            showPreferencesBtn: "Gestisci preferenze",
+            footer: '<a href="#privacy-policy">Privacy Policy</a>',
+          },
+          preferencesModal: {
+            title: "Centro Preferenze Cookie",
+            acceptAllBtn: "Accetta tutti",
+            acceptNecessaryBtn: "Solo necessari",
+            savePreferencesBtn: "Salva preferenze",
+            closeIconLabel: "Chiudi",
+            sections: [
+              {
+                title: "Utilizzo dei Cookie 📢",
+                description:
+                  'Utilizziamo i cookie per garantire le funzionalità di base del sito web e per migliorare la tua esperienza online. Puoi scegliere per ogni categoria di accettare/rifiutare quando vuoi. Per maggiori dettagli sui cookie e altri dati sensibili, leggi la <a href="#privacy-policy" class="cc-link">Privacy Policy</a>.',
+              },
+              {
+                title: "Cookie Strettamente Necessari",
+                description:
+                  "Questi cookie sono essenziali per il corretto funzionamento del sito web. Senza questi cookie, il sito web non funzionerà correttamente.",
+                linkedCategory: "necessary",
+              },
+              {
+                title: "Cookie di Analisi e Performance",
+                description:
+                  "Questi cookie ci permettono di contare le visite e le sorgenti di traffico, così possiamo misurare e migliorare le performance del nostro sito.",
+                linkedCategory: "analytics",
+              },
+            ],
+          },
+        },
+      },
+    },
+    onFirstConsent: ({ cookie }) => {
+      logger.log("First consent given", cookie);
+      // Load analytics if accepted on first consent
+      if (CookieConsent.acceptedCategory("analytics")) {
+        loadAnalytics();
+      }
+    },
+    onConsent: ({ cookie }) => {
+      logger.log("Consent updated", cookie);
+      // Load analytics if accepted
+      if (CookieConsent.acceptedCategory("analytics")) {
+        loadAnalytics();
+      }
+    },
+    onChange: ({ cookie, changedCategories }) => {
+      logger.log("Consent changed", cookie, changedCategories);
+
+      // Handle analytics category change
+      if (changedCategories.includes("analytics")) {
+        if (CookieConsent.acceptedCategory("analytics")) {
+          // Enable analytics
+          loadAnalytics();
+        } else {
+          // Disable analytics - clear gtag
+          if (window.gtag) {
+            window.gtag("consent", "update", {
+              analytics_storage: "denied",
+            });
+          }
+        }
+      }
+    },
+    onModalReady: ({ modalName }) => {
+      logger.log("Modal ready", modalName);
+    },
+  });
+}
+
+// Load Google Analytics when consent is given
+function loadAnalytics() {
+  logger.log("Loading analytics scripts");
+  // Find and execute analytics scripts
+  const analyticsScripts = document.querySelectorAll(
+    'script[data-category="analytics"]'
+  );
+  analyticsScripts.forEach((script) => {
+    const newScript = document.createElement("script");
+    newScript.textContent = script.textContent;
+    document.head.appendChild(newScript);
+  });
+}
+
+// Initialize Privacy Modal
+function initializePrivacyModal() {
+  const privacyModal = document.getElementById("privacy-modal");
+  const privacyLinks = document.querySelectorAll(
+    'a[href="#privacy-policy"], #privacy-policy-link'
+  );
+  const closeButton = document.querySelector(".privacy-modal-close");
+  const manageCookiesBtn = document.getElementById("manage-cookies");
+
+  // Open privacy modal
+  privacyLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      privacyModal.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  // Close privacy modal
+  function closeModal() {
+    privacyModal.style.display = "none";
+    document.body.style.overflow = "";
+  }
+
+  closeButton?.addEventListener("click", closeModal);
+
+  // Close modal when clicking outside
+  privacyModal.addEventListener("click", (e) => {
+    if (e.target === privacyModal) {
+      closeModal();
+    }
+  });
+
+  // Close modal with Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && privacyModal.style.display === "flex") {
+      closeModal();
+    }
+  });
+
+  // Manage cookies button
+  manageCookiesBtn?.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (typeof CookieConsent !== "undefined") {
+      CookieConsent.show();
+    }
+  });
+}
+
 // Initialize functions when DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
+  initializeCookieConsent();
+  initializePrivacyModal();
   initializeGlobalMouseTracking();
   initializeEffects();
   initializeContactForm();
@@ -13,9 +199,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Initialize location selector for map switching
 function initializeLocationSelector() {
-  const locationTabs = document.querySelectorAll('.location-tab');
-  const locationMap = document.getElementById('location-map');
-  
+  const locationTabs = document.querySelectorAll(".location-tab");
+  const locationMap = document.getElementById("location-map");
+
   if (!locationTabs.length || !locationMap) return;
 
   // Location data for easy management and future expansion
@@ -24,40 +210,40 @@ function initializeLocationSelector() {
   // 2. Add a corresponding button in the HTML with matching data-location attribute
   const locations = {
     bellinzona: {
-      name: 'Bellinzona',
-      address: 'Via Codeborgo 1, 6500 Bellinzona, Switzerland',
-      query: 'Via%20Codeborgo%201,%206500%20Bellinzona,%20Switzerland',
-      title: 'Electra Fitness Bellinzona'
+      name: "Bellinzona",
+      address: "Via Codeborgo 1, 6500 Bellinzona, Switzerland",
+      query: "Via%20Codeborgo%201,%206500%20Bellinzona,%20Switzerland",
+      title: "Electra Fitness Bellinzona",
     },
     locarno: {
-      name: 'Locarno', 
-      address: 'Via Vincenzo Vela 5, 6600 Locarno, Switzerland',
-      query: 'Via%20Vincenzo%20Vela%205,%206600%20Locarno,%20Switzerland',
-      title: 'Electra Fitness Locarno'
-    }
+      name: "Locarno",
+      address: "Via Vincenzo Vela 5, 6600 Locarno, Switzerland",
+      query: "Via%20Vincenzo%20Vela%205,%206600%20Locarno,%20Switzerland",
+      title: "Electra Fitness Locarno",
+    },
     // Future locations can be added here:
     // zurich: {
     //   name: 'Zurich',
-    //   address: 'Sample Address, 8000 Zurich, Switzerland', 
+    //   address: 'Sample Address, 8000 Zurich, Switzerland',
     //   query: 'Sample%20Address,%208000%20Zurich,%20Switzerland',
     //   title: 'Electra Fitness Zurich'
     // }
   };
 
   // Handle tab clicks
-  locationTabs.forEach(tab => {
-    tab.addEventListener('click', (e) => {
+  locationTabs.forEach((tab) => {
+    tab.addEventListener("click", (e) => {
       e.preventDefault();
-      
-      const locationKey = tab.getAttribute('data-location');
+
+      const locationKey = tab.getAttribute("data-location");
       const location = locations[locationKey];
-      
+
       if (!location) return;
 
       // Update active state
-      locationTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      
+      locationTabs.forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+
       // Update map iframe
       const newSrc = `https://maps.google.com/maps?width=100%&height=400&hl=en&q=${location.query}&t=&z=15&ie=UTF8&iwloc=B&output=embed`;
       locationMap.src = newSrc;
