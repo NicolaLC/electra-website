@@ -3,6 +3,7 @@
 /.vscode
 /.idea
 .env
+server/.env
 
 # PHP specific
 /server/vendor

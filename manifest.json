@@ -1,1 +1,27 @@
-{}
+{
+  "name": "Electra Fitness",
+  "short_name": "Electra",
+  "description": "Un allenamento completo che unisce salute, forma fisica e benessere, ideale per migliorare il corpo in modo efficace e mirato.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#151515",
+  "theme_color": "#151515",
+  "orientation": "portrait-primary",
+  "categories": ["fitness", "health", "sports"],
+  "icons": [
+    {
+      "src": "public/favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "public/images/apple-touch-icon.webp",
+      "sizes": "72x72",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ],
+  "lang": "it",
+  "scope": "/",
+  "id": "electra-fitness-app"
+}

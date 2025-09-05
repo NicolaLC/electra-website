@@ -7,54 +7,62 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeGlobalMouseTracking();
   initializeEffects();
   initializeContactForm();
-  initializeMap();
+  initializeLocationSelector();
   handleMenuToggle();
 });
 
-// Initialize Leaflet
-function initializeMap() {
-  const map = L.map("map").setView([46.192239, 9.023163], 14); // Coordinates for Bellinzona
+// Initialize location selector for map switching
+function initializeLocationSelector() {
+  const locationTabs = document.querySelectorAll('.location-tab');
+  const locationMap = document.getElementById('location-map');
+  
+  if (!locationTabs.length || !locationMap) return;
 
-  // Add a tile layer with a custom color palette
-  L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
-    attribution: "© OpenStreetMap contributors",
-    maxZoom: 19,
-  }).addTo(map);
+  // Location data for easy management and future expansion
+  // To add new locations, simply:
+  // 1. Add a new entry here with the location key, name, address, and encoded query
+  // 2. Add a corresponding button in the HTML with matching data-location attribute
+  const locations = {
+    bellinzona: {
+      name: 'Bellinzona',
+      address: 'Via Codeborgo 1, 6500 Bellinzona, Switzerland',
+      query: 'Via%20Codeborgo%201,%206500%20Bellinzona,%20Switzerland',
+      title: 'Electra Fitness Bellinzona'
+    },
+    locarno: {
+      name: 'Locarno', 
+      address: 'Via Vincenzo Vela 5, 6600 Locarno, Switzerland',
+      query: 'Via%20Vincenzo%20Vela%205,%206600%20Locarno,%20Switzerland',
+      title: 'Electra Fitness Locarno'
+    }
+    // Future locations can be added here:
+    // zurich: {
+    //   name: 'Zurich',
+    //   address: 'Sample Address, 8000 Zurich, Switzerland', 
+    //   query: 'Sample%20Address,%208000%20Zurich,%20Switzerland',
+    //   title: 'Electra Fitness Zurich'
+    // }
+  };
 
-  // Add a custom marker for the location
-  var customIcon = L.icon({
-    iconUrl: "public/images/apple-touch-icon.webp", // Replace with the actual marker icon path
-    iconSize: [38, 38], // Size of the icon
-    iconAnchor: [19, 38], // Anchor point of the icon
-    popupAnchor: [0, -38], // Position of the popup relative to the icon
-  });
+  // Handle tab clicks
+  locationTabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      const locationKey = tab.getAttribute('data-location');
+      const location = locations[locationKey];
+      
+      if (!location) return;
 
-  L.marker([46.192239, 9.023163], { icon: customIcon })
-    .addTo(map)
-    .bindPopup(
-      "<b>Electra Fitness</b><br>Via Codeborgo 1, 6500 Bellinzona, Switzerland"
-    ),
-    // Add a second custom marker for the new location
-    L.marker([46.169858, 8.799533], { icon: customIcon })
-      .addTo(map)
-      .bindPopup(
-        "<b>Electra Fitness</b><br>Via Vincenzo Vela 5, 6600 Locarno, Switzerland"
-      );
-
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
-    subdomains: "abcd",
-    maxZoom: 19,
-  }).addTo(map);
-
-  // Adjust the map view to fit all markers
-  const bounds = L.latLngBounds([
-    [46.192239, 9.023163], // Bellinzona
-    [46.169858, 8.799533], // Locarno
-  ]);
-  map.fitBounds(bounds, {
-    padding: [50, 50], // Padding around the bounds
+      // Update active state
+      locationTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      
+      // Update map iframe
+      const newSrc = `https://maps.google.com/maps?width=100%&height=400&hl=en&q=${location.query}&t=&z=15&ie=UTF8&iwloc=B&output=embed`;
+      locationMap.src = newSrc;
+      locationMap.title = location.title;
+    });
   });
 }
 
@@ -225,7 +233,7 @@ function initializeContactForm() {
     const isValid = validateForm(fields);
 
     if (isValid) {
-      const res = await fetch(`http://localhost:4243/mailer.php`, {
+      const res = await fetch(`${window.location.origin}/server/mailer.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -236,7 +244,7 @@ function initializeContactForm() {
         }),
       });
 
-      const data = await res.json();
+      await res.json();
       if (res.ok) {
         showFormSuccess(form);
       }
