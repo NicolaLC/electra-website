@@ -1135,18 +1135,6 @@ footer {
   padding-right: var(--gap-normal);
 }
 
-.about-us-image-1 {
-  background-image: url("public/images/about-us-image-1.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-.about-us-image-2 {
-  background-image: url("public/images/about-us-image-2.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
 /* Contact Form Section Styles */
 .section-contacts {
   background-color: var(--color-dark);
