@@ -4,16 +4,35 @@ let mouseY = 0;
 
 // Utility logger - only logs on localhost
 const logger = (() => {
-  const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-  
+  const isLocalhost =
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1";
+
   return {
     log: (...args) => {
       if (isLocalhost) {
         console.log(...args);
       }
-    }
+    },
   };
 })();
+
+// Global function to show cookie preferences modal
+window.showCookiePreferences = function () {
+  try {
+    // Try the preferences modal method first
+    if (CookieConsent && CookieConsent.showPreferences) {
+      CookieConsent.showPreferences();
+    } else if (CookieConsent && CookieConsent.show) {
+      // Fallback to show method with force parameter
+      CookieConsent.show(true);
+    } else {
+      console.warn("CookieConsent preferences not available");
+    }
+  } catch (error) {
+    console.error("Error showing cookie preferences:", error);
+  }
+};
 
 // Initialize Cookie Consent
 function initializeCookieConsent() {
@@ -144,7 +163,6 @@ function initializePrivacyModal() {
     'a[href="#privacy-policy"], #privacy-policy-link'
   );
   const closeButton = document.querySelector(".privacy-modal-close");
-  const manageCookiesBtn = document.getElementById("manage-cookies");
 
   // Open privacy modal
   privacyLinks.forEach((link) => {
@@ -174,14 +192,6 @@ function initializePrivacyModal() {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && privacyModal.style.display === "flex") {
       closeModal();
-    }
-  });
-
-  // Manage cookies button
-  manageCookiesBtn?.addEventListener("click", (e) => {
-    e.preventDefault();
-    if (typeof CookieConsent !== "undefined") {
-      CookieConsent.show();
     }
   });
 }

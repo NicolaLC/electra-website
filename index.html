@@ -335,9 +335,9 @@
               <img
                 src="public/images/image-02.webp"
                 alt="Attiva ogni singola fibra del tuo corpo"
-                style="object-position: right"
-                width="110%"
-                height="110%"
+                style="object-position: top"
+                width="100%"
+                height="100%"
               />
             </div>
           </div>
@@ -679,7 +679,7 @@
               <input type="checkbox" id="privacy" required />
               <label for="privacy"
                 >Accetto il trattamento dei miei dati secondo la 
-                <a href="#privacy-policy" style="color: #5FE3FF; text-decoration: underline;">Privacy Policy</a> 
+                <a href="#privacy-policy">Privacy Policy</a> 
                 in vigore</label
               >
             </div>
@@ -844,7 +844,7 @@
     <div class="credits">
       <p>&copy; 2025 Electra Fitness. Tutti i diritti riservati. | 
         <a href="#privacy-policy" id="privacy-policy-link" style="color: #5FE3FF;">Privacy Policy</a> | 
-        <button id="manage-cookies" style="background: none; border: none; color: #5FE3FF; cursor: pointer; text-decoration: underline;">Gestisci Cookie</button>
+        <button id="manage-cookies" onclick="showCookiePreferences()" style="background: none; border: none; color: #5FE3FF; cursor: pointer; text-decoration: underline; font-family: Lora serif; font-size: 0.8rem;">Gestisci Cookie</button>
       </p>
     </div>
 
@@ -911,6 +911,6 @@
     </div>
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.umd.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>

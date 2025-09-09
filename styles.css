@@ -214,9 +214,13 @@ body.no-scroll {
 
 #cc-main .pm__section-title {
   font-family: var(--font-family-primary) !important;
-  color: var(--color-dark) !important;
+  color: var(--color-light) !important;
   font-weight: 500 !important;
 }
+
+#cc-main .pm__section--toggle .pm__section-title-wrapper .pm__section-title {
+  color: var(--color-dark) !important;
+} 
 
 #cc-main .pm__section-title[aria-expanded="true"]:not(:hover) {
   color: var(--color-light) !important;
@@ -896,6 +900,7 @@ section {
   position: relative;
   width: 100%;
   height: 100%;
+  aspect-ratio: 1;
   background-color: var(--color-overlay);
   position: relative;
   overflow: hidden;

@@ -6,14 +6,18 @@
   "scripts": {
     "start": "node server/index.js",
     "dev": "nodemon server/index.js",
-    "server": "cd server && php -S localhost:4243"
+    "dev:vite": "vite",
+    "server": "cd server && php -S localhost:4243",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
+    "connect-livereload": "^0.6.1",
     "express": "^4.18.3",
-    "livereload": "^0.9.3",
-    "connect-livereload": "^0.6.1"
+    "livereload": "^0.9.3"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "vite": "^7.1.4"
   }
 }
