@@ -155,12 +155,8 @@ body.no-scroll {
 }
 
 #cc-main .cm__footer a {
-  color: var(--color-primary) !important;
+  color: var(--color-black) !important;
   text-decoration: none !important;
-}
-
-#cc-main .cm__footer a:hover {
-  text-decoration: underline !important;
 }
 
 #cc-main .btn {
@@ -1401,6 +1397,13 @@ footer {
 
 .map-container {
   width: 100%;
+}
+
+@media (max-width: 768px) {
+  .location-tabs {
+    flex-wrap: wrap;
+    gap: var(--gap-medium);
+  }
 }
 
 .map-container iframe {

@@ -231,6 +231,12 @@ function initializeLocationSelector() {
       query: "Via%20Vincenzo%20Vela%205,%206600%20Locarno,%20Switzerland",
       title: "Electra Fitness Locarno",
     },
+    giubiasco: {
+      name: "Giubiasco",
+      address: "Viale stazione 3c, Giubiasco, Switzerland",
+      query: "Viale%20stazione%203c,%20Giubiasco,%20Switzerland",
+      title: "Electra Fitness Giubiasco",
+    },
     // Future locations can be added here:
     // zurich: {
     //   name: 'Zurich',
