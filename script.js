@@ -41,6 +41,12 @@ function initializeCookieConsent() {
     return;
   }
 
+  // Check if there's already stored consent and update GA immediately
+  const storedConsent = CookieConsent.getCookie();
+  if (storedConsent && storedConsent.categories) {
+    updateAnalyticsConsent(storedConsent.categories.includes("analytics"));
+  }
+
   CookieConsent.run({
     guiOptions: {
       consentModal: {
@@ -106,34 +112,23 @@ function initializeCookieConsent() {
     },
     onFirstConsent: ({ cookie }) => {
       logger.log("First consent given", cookie);
-      // Load analytics if accepted on first consent
+      // Update consent if analytics accepted
       if (CookieConsent.acceptedCategory("analytics")) {
-        loadAnalytics();
+        updateAnalyticsConsent(true);
       }
     },
     onConsent: ({ cookie }) => {
       logger.log("Consent updated", cookie);
-      // Load analytics if accepted
+      // Update consent if analytics accepted
       if (CookieConsent.acceptedCategory("analytics")) {
-        loadAnalytics();
+        updateAnalyticsConsent(true);
       }
     },
     onChange: ({ cookie, changedCategories }) => {
       logger.log("Consent changed", cookie, changedCategories);
-
       // Handle analytics category change
       if (changedCategories.includes("analytics")) {
-        if (CookieConsent.acceptedCategory("analytics")) {
-          // Enable analytics
-          loadAnalytics();
-        } else {
-          // Disable analytics - clear gtag
-          if (window.gtag) {
-            window.gtag("consent", "update", {
-              analytics_storage: "denied",
-            });
-          }
-        }
+        updateAnalyticsConsent(CookieConsent.acceptedCategory("analytics"));
       }
     },
     onModalReady: ({ modalName }) => {
@@ -142,17 +137,14 @@ function initializeCookieConsent() {
   });
 }
 
-// Load Google Analytics when consent is given
-function loadAnalytics() {
-  logger.log("Loading analytics scripts");
-  // Find and execute analytics scripts
-  const analyticsScripts = document.querySelectorAll(
-    'script[data-category="analytics"]'
+// Update Google Analytics consent
+function updateAnalyticsConsent(granted) {
+  logger.log(
+    `Updating analytics consent to: ${granted ? "granted" : "denied"}`
   );
-  analyticsScripts.forEach((script) => {
-    const newScript = document.createElement("script");
-    newScript.textContent = script.textContent;
-    document.head.appendChild(newScript);
+
+  gtag("consent", "update", {
+    analytics_storage: granted ? "granted" : "denied",
   });
 }
 
