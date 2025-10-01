@@ -98,31 +98,6 @@ body.no-scroll {
   overflow: hidden;
 }
 
-/* Cookie Consent Custom Styles */
-:root {
-  --cc-bg: var(--color-background);
-  --cc-text: var(--color-light);
-  --cc-btn-primary-bg: var(--color-primary);
-  --cc-btn-primary-text: var(--color-dark);
-  --cc-btn-primary-hover-bg: rgba(95, 227, 255, 0.8);
-  --cc-btn-secondary-bg: transparent;
-  --cc-btn-secondary-text: var(--color-light);
-  --cc-btn-secondary-border: 1px solid var(--color-light);
-  --cc-btn-secondary-hover-bg: var(--color-light);
-  --cc-btn-secondary-hover-text: var(--color-dark);
-  --cc-toggle-bg-off: #374151;
-  --cc-toggle-bg-on: var(--color-primary);
-  --cc-toggle-bg-readonly: #6b7280;
-  --cc-toggle-knob-bg: var(--color-light);
-  --cc-toggle-knob-icon-color: var(--color-dark);
-  --cc-cookie-category-block-bg: rgba(255, 255, 255, 0.05);
-  --cc-cookie-category-block-bg-hover: rgba(255, 255, 255, 0.1);
-  --cc-section-border: rgba(255, 255, 255, 0.1);
-  --cc-cookie-table-border: rgba(255, 255, 255, 0.1);
-  --cc-overlay-bg: rgba(0, 0, 0, 0.85);
-  --cc-webkit-scrollbar-bg: #374151;
-  --cc-webkit-scrollbar-bg-hover: #4b5563;
-}
 
 #cc-main {
   font-family: var(--font-family-secondary) !important;

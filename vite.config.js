@@ -5,7 +5,7 @@ export default defineConfig({
   build: {
     outDir: "dist", // Output directory for build files
     emptyOutDir: true, // Clean the output directory before building
-    // cssMinify: false, // Skip CSS minification only
+    cssMinify: false, // Skip CSS minification
     rollupOptions: {
       input: {
         main: "./index.html",
